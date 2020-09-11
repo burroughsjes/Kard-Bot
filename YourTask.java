@@ -19,11 +19,13 @@ import twitter4j.TwitterFactory;
 
 public class YourTask extends TimerTask{
     Twitter twitter;
+    
     public YourTask() {
         twitter = TwitterFactory.getSingleton();
         run();
     }
     
+    // randomly chooses an image in Kard_Pics folder
     public void run() {
         File folder = new File("Kard_Pics");
         int folderLength = folder.listFiles().length;
