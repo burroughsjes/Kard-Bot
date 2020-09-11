@@ -7,6 +7,7 @@
 /**
  *
  * @author jbjb2
+ * Intended to tweet out a random picture of KARD every time a specified interval passed.
  */
 import java.io.*;
 import java.util.*;
@@ -23,11 +24,8 @@ public class KardBotMain {
         
         TJTwitter bigBird = new TJTwitter(consolePrint);
         
-        //bigBird.retweet("starrytaelegram");
-        
         bigBird.tweetOut();
-        
-        //User twitter_handle = new User("starrytaelegram");
+
     }
 }
 
@@ -37,21 +35,20 @@ class TJTwitter {
     
     public TJTwitter(PrintStream console) {
         twitter = TwitterFactory.getSingleton();
-        //consolePrint = console;
     }
     
+    // tweets out the given String in timed intervals
     public void tweetOut(String message) throws TwitterException, IOException {
-        
         Calendar date = Calendar.getInstance();
         date.set(Calendar.HOUR_OF_DAY, 14);
         date.set(Calendar.MINUTE, 30);
         date.set(Calendar.SECOND, 0);
         
         Timer timer = new Timer();
-        timer.schedule(new YourTask(), date.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
-        
+        timer.schedule(new YourTask(), date.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)); 
     }
     
+    // tweets out an image in timed intervals
     public void tweetOut() throws TwitterException, IOException {
         
         Calendar date = Calendar.getInstance();
@@ -64,10 +61,10 @@ class TJTwitter {
         
     }
     
+    // retweets new tweets from user with given String handle
     public void retweet(String handle) throws TwitterException, IOException {
         User user = twitter.showUser(handle);
 
         twitter.retweetStatus(user.getId());
-        
     }
 }
